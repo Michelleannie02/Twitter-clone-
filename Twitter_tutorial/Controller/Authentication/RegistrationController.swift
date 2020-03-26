@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
     // MARK: - Properties
     
     private let imagePicker = UIImagePickerController()
-    
+    private var profileImage: UIImage?
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo"), for: .normal)
@@ -97,7 +98,29 @@ class RegistrationController: UIViewController {
         present(imagePicker,animated: true,completion: nil)
     }
     @objc func handleRegistration(){
+        guard let profileImage = profileImage else{
+            print("DEBUG: Please select a profile image..")
+            return
+        }
         
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let fullname = fullnameTextField.text else {return}
+        guard let username = usernameTextField.text else {return}
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error{
+                print("DEBUG: Error is \(error.localizedDescription)")
+                return
+            }
+            guard let uid = result?.user.uid else{return}
+            
+            let values = ["email":email,"username":username,"fullname":fullname]
+            
+            REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+                print("DEBUG: Successfully updated user infomation..")
+            }
+        }
     }
     @objc func handleShowLogin(){
         navigationController?.popViewController(animated: true)
@@ -137,7 +160,15 @@ class RegistrationController: UIViewController {
 extension RegistrationController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else { return }
+        self.profileImage = profileImage
+        plusPhotoButton.layer.cornerRadius = 128/2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.imageView?.contentMode = .scaleAspectFill
+        plusPhotoButton.imageView?.clipsToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
+        plusPhotoButton.layer.borderWidth = 3
+        self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
-        self.plusPhotoButton.setImage(profileImage, for: .normal)
+        dismiss(animated: true, completion: nil)
     }
 }
