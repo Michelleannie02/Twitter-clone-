@@ -15,6 +15,7 @@ class RegistrationController: UIViewController {
     
     private let imagePicker = UIImagePickerController()
     private var profileImage: UIImage?
+    
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo"), for: .normal)
@@ -107,18 +108,42 @@ class RegistrationController: UIViewController {
         guard let password = passwordTextField.text else {return}
         guard let fullname = fullnameTextField.text else {return}
         guard let username = usernameTextField.text else {return}
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if let error = error{
-                print("DEBUG: Error is \(error.localizedDescription)")
-                return
-            }
-            guard let uid = result?.user.uid else{return}
+        print(3)
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
+        print(4)
+        let filename = NSUUID().uuidString
+        print(filename)
+        let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
+        print(storageRef)
+        print(imageData)
+        storageRef.putData(imageData, metadata: nil) { (meta, error) in
             
-            let values = ["email":email,"username":username,"fullname":fullname]
-            
-            REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
-                print("DEBUG: Successfully updated user infomation..")
+           
+            storageRef.downloadURL { (url, error) in
+                print(url?.absoluteString)
+                guard let profileImageUrl = url?.absoluteString else {return}
+               
+                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                    if let error = error{
+                        print("DEBUG: Error is \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let uid = result?.user.uid else{return}
+                    
+                    
+                    let values = ["email":email,
+                    "username":username,
+                    "fullname":fullname,
+                    "profileImageUrl":profileImageUrl]
+                    
+                    
+                    
+                    
+                    REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+                        print("DEBUG: Successfully updated user infomation..")
+                    }
+                }
             }
         }
     }
