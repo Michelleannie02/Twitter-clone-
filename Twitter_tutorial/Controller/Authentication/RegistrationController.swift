@@ -99,53 +99,23 @@ class RegistrationController: UIViewController {
         present(imagePicker,animated: true,completion: nil)
     }
     @objc func handleRegistration(){
-        guard let profileImage = profileImage else{
-            print("DEBUG: Please select a profile image..")
-            return
-        }
-        
+        guard let profileImage = profileImage else{return}
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         guard let fullname = fullnameTextField.text else {return}
         guard let username = usernameTextField.text else {return}
-        print(3)
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
-        print(4)
-        let filename = NSUUID().uuidString
-        print(filename)
-        let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
-        print(storageRef)
-        print(imageData)
-        storageRef.putData(imageData, metadata: nil) { (meta, error) in
+        
+        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
+        //user data register here
+        AuthService.shared.fetchRegisterUser(credentials: credentials) { (error, ref) in
+            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else { return }
+            guard let tab = window.rootViewController as? MainTabViewController else { return }
             
-           
-            storageRef.downloadURL { (url, error) in
-                print(url?.absoluteString)
-                guard let profileImageUrl = url?.absoluteString else {return}
-               
-                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                    if let error = error{
-                        print("DEBUG: Error is \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    guard let uid = result?.user.uid else{return}
-                    
-                    
-                    let values = ["email":email,
-                    "username":username,
-                    "fullname":fullname,
-                    "profileImageUrl":profileImageUrl]
-                    
-                    
-                    
-                    
-                    REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
-                        print("DEBUG: Successfully updated user infomation..")
-                    }
-                }
-            }
+            tab.authenticateUserAndConfigureUI()
+            self.dismiss(animated: true, completion: nil)
         }
+        
+        
     }
     @objc func handleShowLogin(){
         navigationController?.popViewController(animated: true)
