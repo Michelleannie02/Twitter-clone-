@@ -5,6 +5,7 @@
 //  Created by 梶村律太 on 2020/03/26.
 //  Copyright © 2020 梶村律太. All rights reserved.
 //
+
 import UIKit
 
 extension UIView {
@@ -18,7 +19,6 @@ extension UIView {
                 paddingRight: CGFloat = 0,
                 width: CGFloat? = nil,
                 height: CGFloat? = nil) {
-        
         translatesAutoresizingMaskIntoConstraints = false
         
         if let top = top {

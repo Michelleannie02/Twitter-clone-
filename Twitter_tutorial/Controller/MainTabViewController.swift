@@ -46,7 +46,8 @@ class MainTabViewController: UITabBarController {
     
     //useの受け渡し
     func fetchUser(){
-        UserService.shared.fetchUser { user in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.shared.fetchUser(uid: uid) { user in
             self.user = user
         }
     }
