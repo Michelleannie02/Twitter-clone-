@@ -69,21 +69,19 @@ class ProfileHeader: UICollectionReusableView {
     private let fullnameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Eddie Brock"
         return label
     }()
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "hama"
         label.textColor = .lightGray
         return label
     }()
     private let bionameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.text = "abioture"
         label.numberOfLines = 3
-        label.text = "This is user bio"
         return label
     }()
     private let underlineView :UIView = {
@@ -185,6 +183,9 @@ class ProfileHeader: UICollectionReusableView {
         editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         followingLabel.attributedText = viewModel.followingString
         followersLabel.attributedText = viewModel.followerString
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = viewModel.usernameText
+        
     }
 }
 
