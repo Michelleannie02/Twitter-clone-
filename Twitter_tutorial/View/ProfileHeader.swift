@@ -11,6 +11,7 @@ import UIKit
 // how to delegate 1
 protocol ProfileHeaderDelegate: class {
     func handleDismissal()
+    func handleEditProfileFollow(_ header: ProfileHeader)
 }
 
 class ProfileHeader: UICollectionReusableView {
@@ -54,7 +55,7 @@ class ProfileHeader: UICollectionReusableView {
         return iv
     }()
     
-    private lazy var editProfileFollowButton: UIButton = {
+    lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.borderColor = UIColor.twitterBlue.cgColor
         button.layer.borderWidth = 1.25
@@ -163,7 +164,7 @@ class ProfileHeader: UICollectionReusableView {
         delegate?.handleDismissal()
     }
     @objc func handleProfileFollow(){
-        
+        delegate?.handleEditProfileFollow(self)
     }
     @objc func handleFollowingTapped(){
         
