@@ -38,6 +38,7 @@
 		DAB7C04024321079004ABCDE /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7C03F24321078004ABCDE /* ProfileFilterView.swift */; };
 		DAB7C04224321353004ABCDE /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7C04124321353004ABCDE /* ProfileFilterCell.swift */; };
 		DAB7C04624323769004ABCDE /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7C04524323769004ABCDE /* ProfileHeaderViewModel.swift */; };
+		DAED19C6243337FE00FC2E7D /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAED19C5243337FE00FC2E7D /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		DAB7C03F24321078004ABCDE /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
 		DAB7C04124321353004ABCDE /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
 		DAB7C04524323769004ABCDE /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		DAED19C5243337FE00FC2E7D /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				DAB7C03D2431EED4004ABCDE /* ProfileHeader.swift */,
 				DAB7C03F24321078004ABCDE /* ProfileFilterView.swift */,
 				DAB7C04124321353004ABCDE /* ProfileFilterCell.swift */,
+				DAED19C5243337FE00FC2E7D /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				DA61727124306AD600A9E9EC /* CaptionTextView.swift in Sources */,
 				DAB7C04224321353004ABCDE /* ProfileFilterCell.swift in Sources */,
 				DA607689242C243800580051 /* ConversationsController.swift in Sources */,
+				DAED19C6243337FE00FC2E7D /* UserCell.swift in Sources */,
 				DA617263242C55F900A9E9EC /* Utilities.swift in Sources */,
 				DA607667242C210B00580051 /* AppDelegate.swift in Sources */,
 				DA61725C242C332C00A9E9EC /* Extensions.swift in Sources */,

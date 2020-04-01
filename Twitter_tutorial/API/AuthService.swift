@@ -40,14 +40,15 @@ struct AuthService {
         
         storageRef.putData(imageData, metadata: nil) { (meta, error) in
             storageRef.downloadURL { (url, error) in
-        
-                guard let profileImageUrl = url?.absoluteString else {return}
-               
+                print(error)
+                guard let profileImageUrl = url?.absoluteString else { return }
+               print(12)
                 Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                     if let error = error{
                         print("DEBUG: Error is \(error.localizedDescription)")
                         return
                     }
+                    print("6")
                     
                     guard let uid = result?.user.uid else{return}
                     
@@ -55,6 +56,7 @@ struct AuthService {
                                   "username":username,
                                   "fullname":fullname,
                                   "profileImageUrl":profileImageUrl]
+                    print("DEBUG:\(values)")
                     
                     REF_USERS.child(uid).updateChildValues(values, withCompletionBlock: completion)
                     

@@ -64,6 +64,7 @@ class MainTabViewController: UITabBarController {
             configureViewController()
             configureUI()
             fetchUser()
+            
         }
     }
     
@@ -71,7 +72,6 @@ class MainTabViewController: UITabBarController {
         do{
             try Auth.auth().signOut()
         } catch let error {
-            print(3)
         }
     }
     // MARK: - Selectors

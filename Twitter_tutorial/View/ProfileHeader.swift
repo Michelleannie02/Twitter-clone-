@@ -11,6 +11,7 @@ import UIKit
 // how to delegate 1
 protocol ProfileHeaderDelegate: class {
     func handleDismissal()
+    func handleEditProfileFollow(_ header: ProfileHeader)
 }
 
 class ProfileHeader: UICollectionReusableView {
@@ -54,7 +55,7 @@ class ProfileHeader: UICollectionReusableView {
         return iv
     }()
     
-    private lazy var editProfileFollowButton: UIButton = {
+    lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.borderColor = UIColor.twitterBlue.cgColor
         button.layer.borderWidth = 1.25
@@ -69,21 +70,19 @@ class ProfileHeader: UICollectionReusableView {
     private let fullnameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Eddie Brock"
         return label
     }()
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "hama"
         label.textColor = .lightGray
         return label
     }()
     private let bionameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.text = "abioture"
         label.numberOfLines = 3
-        label.text = "This is user bio"
         return label
     }()
     private let underlineView :UIView = {
@@ -165,7 +164,7 @@ class ProfileHeader: UICollectionReusableView {
         delegate?.handleDismissal()
     }
     @objc func handleProfileFollow(){
-        
+        delegate?.handleEditProfileFollow(self)
     }
     @objc func handleFollowingTapped(){
         
@@ -185,6 +184,9 @@ class ProfileHeader: UICollectionReusableView {
         editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         followingLabel.attributedText = viewModel.followingString
         followersLabel.attributedText = viewModel.followerString
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = viewModel.usernameText
+        
     }
 }
 

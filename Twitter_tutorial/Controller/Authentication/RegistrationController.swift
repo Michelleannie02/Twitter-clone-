@@ -65,7 +65,6 @@ class RegistrationController: UIViewController {
     
     private let usernameTextField: UITextField = {
         let tf = Utilities().textField(withPlaceholder: "User Name")
-        tf.isSecureTextEntry = true
         return tf
     }()
     
@@ -99,18 +98,27 @@ class RegistrationController: UIViewController {
         present(imagePicker,animated: true,completion: nil)
     }
     @objc func handleRegistration(){
-        guard let profileImage = profileImage else{return}
+        guard let profileImage = profileImage else {return}
+        print("1")
         guard let email = emailTextField.text else {return}
+        print("2")
         guard let password = passwordTextField.text else {return}
+        print("3")
         guard let fullname = fullnameTextField.text else {return}
+        print("4")
         guard let username = usernameTextField.text?.lowercased() else {return}
-        
+        print("5")
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
+        print(credentials)
         //user data register here
         AuthService.shared.fetchRegisterUser(credentials: credentials) { (error, ref) in
+            if let error = error{
+                print(error)
+            }
             guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else { return }
+            print("DEBUG:\(window)")
             guard let tab = window.rootViewController as? MainTabViewController else { return }
-            
+            print("success")
             tab.authenticateUserAndConfigureUI()
             self.dismiss(animated: true, completion: nil)
         }
@@ -141,7 +149,7 @@ class RegistrationController: UIViewController {
             stack.spacing = 20
             view.addSubview(stack)
             stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,paddingTop: 32,paddingLeft: 32,paddingRight: 32)
-        //コピへ
+        
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.anchor(left: view.leftAnchor,
                                      bottom:view.safeAreaLayoutGuide.bottomAnchor,
