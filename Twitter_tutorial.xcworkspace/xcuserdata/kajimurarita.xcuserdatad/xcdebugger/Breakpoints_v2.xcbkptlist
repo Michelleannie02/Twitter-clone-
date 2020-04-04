@@ -20,5 +20,53 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E08080DC-4365-4AC8-8423-C9A517AA87D0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Twitter_tutorial/View/ActionSheetLauncher.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "init(user:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E08080DC-4365-4AC8-8423-C9A517AA87D0 - b49fc6bcfa7c595"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Twitter_tutorial.ActionSheetLancher.__allocating_init(user: Twitter_tutorial.User) -&gt; Twitter_tutorial.ActionSheetLancher"
+                  moduleName = "Twitter_tutorial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kajimurarita/Downloads/Twitter%20clone%20/Twitter_tutorial/View/ActionSheetLauncher.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "11">
+               </Location>
+               <Location
+                  uuid = "E08080DC-4365-4AC8-8423-C9A517AA87D0 - 431a2784fa4bb574"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Twitter_tutorial.ActionSheetLancher.init(user: Twitter_tutorial.User) -&gt; Twitter_tutorial.ActionSheetLancher"
+                  moduleName = "Twitter_tutorial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kajimurarita/Downloads/Twitter%20clone%20/Twitter_tutorial/View/ActionSheetLauncher.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "158">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
