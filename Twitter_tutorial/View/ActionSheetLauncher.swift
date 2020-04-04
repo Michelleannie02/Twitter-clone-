@@ -19,6 +19,6 @@ class ActionSheetLancher: NSObject {
     // MARK: - Helpers
     
     func show(){
-        
+        print("DEBUG:show at\(user.username)")
     }
 }
