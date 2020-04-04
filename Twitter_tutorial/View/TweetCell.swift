@@ -10,6 +10,7 @@ import UIKit
 
 protocol TweetCellDelegate:class {
     func handleProfileImageTapped(_ cell :TweetCell)
+    func handleReplyTapped(_ cell :TweetCell)
 }
 
 class TweetCell: UICollectionViewCell {
@@ -47,15 +48,17 @@ class TweetCell: UICollectionViewCell {
     }()
     
     
-    private let commentButton:UIButton = {
+    private lazy var commentButton:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "comment"), for: .normal)
         button.tintColor = .darkGray
         button.setDimensions(width: 20, height: 20)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTaped))
         button.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
         return button
     }()
-    private let retweetButton:UIButton = {
+    
+    private lazy var retweetButton:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "retweet"), for: .normal)
         button.tintColor = .darkGray
@@ -63,7 +66,7 @@ class TweetCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(handleRetweetTapped), for: .touchUpInside)
         return button
     }()
-    private let likeButton:UIButton = {
+    private lazy var likeButton:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "like"), for: .normal)
         button.tintColor = .darkGray
@@ -71,7 +74,7 @@ class TweetCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
         return button
     }()
-    private let shareButton:UIButton = {
+    private lazy var shareButton:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "share"), for: .normal)
         button.tintColor = .darkGray
@@ -79,6 +82,8 @@ class TweetCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)
         return button
     }()
+    
+    
     
     private let infoLabel = UILabel()
         
@@ -103,19 +108,20 @@ class TweetCell: UICollectionViewCell {
         infoLabel.font = UIFont.systemFont(ofSize: 14)
         infoLabel.text = "Eddy Block @venom"
         
-        let actionStack = UIStackView(arrangedSubviews: [commentButton,retweetButton,likeButton,shareButton])
+        addSubview(commentButton)
         
+        let actionStack = UIStackView(arrangedSubviews: [commentButton,retweetButton,likeButton,shareButton])
+
         actionStack.axis = .horizontal
         actionStack.spacing = 72
         addSubview(actionStack)
+        actionStack.centerX(inView: self)
         actionStack.anchor(bottom:bottomAnchor,paddingBottom: 8)
         
         let underlineView = UIView()
         underlineView.backgroundColor = .systemGroupedBackground
         addSubview(underlineView)
-        actionStack.centerX(inView: self)
         underlineView.anchor(left:leftAnchor,bottom: bottomAnchor,right: rightAnchor, height: 1)
-        
         
         
     }
@@ -129,13 +135,13 @@ class TweetCell: UICollectionViewCell {
         delegate?.handleProfileImageTapped(self)
     }
     @objc func handleCommentTapped(){
-        
+        delegate?.handleReplyTapped(self)
     }
     @objc func handleRetweetTapped(){
         
     }
     @objc func handleLikeTapped(){
-        
+    
     }
     @objc func handleShareTapped(){
         
