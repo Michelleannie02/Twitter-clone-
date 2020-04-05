@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol TweetHeaderDelegate: class {
+    func showActionSheet()
+}
+
 class TweetHeader: UICollectionReusableView{
     // MARK: Properties
     
     var tweet:Tweet?{
         didSet{ configure() }
     }
+    weak var delegate: TweetHeaderDelegate?
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -155,7 +160,7 @@ class TweetHeader: UICollectionReusableView{
         print("DEBUG go to user profile")
     }
     @objc func showActionSheet(){
-        print("DEBUG show action sheet")
+        delegate?.showActionSheet()
     }
     @objc func handleCommentTapped(){
         print("DEBUG hanle Retweet")
