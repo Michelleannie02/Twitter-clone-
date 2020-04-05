@@ -21,7 +21,7 @@ struct ActionSheetViewModel {
             results.append(followOption)
         }
         results.append(.report)
-        
+        print(results)
         return results
     }
     

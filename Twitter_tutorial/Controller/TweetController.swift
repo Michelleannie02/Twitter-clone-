@@ -24,6 +24,7 @@ class TweetController: UICollectionViewController {
     
     init(tweet:Tweet) {
         self.tweet = tweet
+        self.actionSheetLancher = ActionSheetLancher(user: tweet.user)
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         
     }
@@ -113,7 +114,22 @@ extension TweetController: TweetHeaderDelegate{
 // MARK: - ActionSheetLauncherDelegate
 extension TweetController: ActionSheetLauncherDelegate {
     func didSelect(option: ActionSheetOptions) {
-        print("DEBUG:\(option.description)")
+        switch option {
+        case .follow(let user):
+            UserService.shared.followUser(uid: user.uid) { (err, ref) in
+                print("DEBUG : follow \(user.username)")
+            }
+        case .unfollow(let user):
+            UserService.shared.unfollowuUser(uid: user.uid) { (err, ref) in
+                print("DEBUG: unfollw\(user.username)")
+            }
+            print("DEBUG: unfollow \(tweet.user)")
+        case .report:
+            print("DEBUG: report \(tweet.user)")
+        case .delete:
+            print("DEBUG: delete \(tweet.user)")
+       
+        }
     }
 }
 
