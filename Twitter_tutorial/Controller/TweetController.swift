@@ -15,9 +15,7 @@ class TweetController: UICollectionViewController {
     
     // MARK: - Properties
     private let tweet: Tweet
-    
-    private let actionSheetLancher: ActionSheetLancher
-    
+    private var actionSheetLancher: ActionSheetLancher!
     private var replies = [Tweet]() {
         didSet{ collectionView.reloadData() }
     }
@@ -26,7 +24,6 @@ class TweetController: UICollectionViewController {
     
     init(tweet:Tweet) {
         self.tweet = tweet
-        self.actionSheetLancher = ActionSheetLancher(user: tweet.user)
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         
     }
@@ -53,6 +50,11 @@ class TweetController: UICollectionViewController {
         collectionView.backgroundColor = .white
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(TweetHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+    }
+    fileprivate func showAction(forUser user: User) {
+        actionSheetLancher = ActionSheetLancher(user: tweet.user)
+        actionSheetLancher.delegate = self
+        actionSheetLancher.show()
     }
 }
 
@@ -92,11 +94,26 @@ extension TweetController: UICollectionViewDelegateFlowLayout{
         return CGSize(width: view.frame.width, height: 120)
     }
 }
-
+// MARK: - TweetHeaderDelegate
 extension TweetController: TweetHeaderDelegate{
     func showActionSheet() {
-        actionSheetLancher.show()
+        if tweet.user.isCurrentUser {
+            showAction(forUser: tweet.user)
+        } else {
+            UserService.shared.checkIfUserIsFollowed(uid: tweet.user.uid) { isFollowed in
+                var user = self.tweet.user
+                user.isFollowed = isFollowed
+                self.showAction(forUser: user)
+                
+            }
+        }
+    }
+    
+}
+// MARK: - ActionSheetLauncherDelegate
+extension TweetController: ActionSheetLauncherDelegate {
+    func didSelect(option: ActionSheetOptions) {
+        print("DEBUG:\(option.description)")
     }
 }
-
 
