@@ -9,6 +9,9 @@
 import UIKit
 
 struct TweetViewModel {
+    
+    // MARK: - Properties
+    
     let tweet:Tweet
     let user:User
     
@@ -51,9 +54,17 @@ struct TweetViewModel {
     var likeButtonTintColor: UIColor {
         return tweet.didLike ? .red : .lightGray
     }
+    
     var likeButtonImage: UIImage {
         let imageName = tweet.didLike ? "like_filled" : "like"
         return UIImage(named: imageName)!
+    }
+    var shouldHideReplyLabel: Bool {
+        return !tweet.isReply
+    }
+    var replyText: String? {
+        guard let replyingToUsername = tweet.replyingTo else { return nil}
+        return "→ replying to @\(replyingToUsername)"
     }
     
     init(tweet:Tweet) {
@@ -65,6 +76,7 @@ struct TweetViewModel {
         attributedTitile.append(NSAttributedString(string: "\(text)", attributes: [.font:UIFont.systemFont(ofSize: 14),.foregroundColor:UIColor.lightGray]))
         return attributedTitile
     }
+    // MARK: - Helpers
     func size(forWidth width: CGFloat) -> CGSize {
         let mesurementLabel = UILabel()
         mesurementLabel.text = tweet.caption

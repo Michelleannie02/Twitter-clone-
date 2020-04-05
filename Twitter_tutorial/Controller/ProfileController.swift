@@ -50,6 +50,8 @@ class ProfileController: UICollectionViewController{
         super.viewDidLoad()
         configureCollectionView()
         fetchTweets()
+        fetchReplies()
+        fetchLikedTweets()
         checkIfUserIsFollowed()
         fetchUserStats()
         
@@ -64,6 +66,16 @@ class ProfileController: UICollectionViewController{
         TweetService.shared.fetchTweets(for: user) { tweets in
             self.tweets = tweets
             self.collectionView.reloadData()
+        }
+    }
+    func fetchLikedTweets(){
+        TweetService.shared.fetchLikes(forUser: user) { tweets in
+            self.likedTweets = tweets
+        }
+    }
+    func fetchReplies(){
+        TweetService.shared.fetchReplies(forUser: user) { tweets in
+            self.replies = tweets
         }
     }
     func checkIfUserIsFollowed() {
@@ -86,6 +98,9 @@ class ProfileController: UICollectionViewController{
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(ProfileHeader.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
+        collectionView.contentInset.bottom = tabHeight
     }
 }
 
@@ -109,6 +124,10 @@ extension ProfileController{
         header.user = user
         return header
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = TweetController(tweet: currentDataSource[indexPath.row])
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 // MARK: -UICollectionViewDelegateFlowLayout
 extension ProfileController:UICollectionViewDelegateFlowLayout{
@@ -117,7 +136,14 @@ extension ProfileController:UICollectionViewDelegateFlowLayout{
         return CGSize(width: view.frame.width, height: 350)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 120)
+        let viewModel = TweetViewModel(tweet: currentDataSource[indexPath.row])
+        var height = viewModel.size(forWidth: view.frame.width).height + 72
+        
+        if currentDataSource[indexPath.row].isReply {
+            height += 20
+        }
+        
+        return CGSize(width: view.frame.width, height: height)
     }
     
 }
