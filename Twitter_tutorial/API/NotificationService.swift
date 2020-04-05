@@ -12,6 +12,8 @@ import Firebase
 struct NotificationService {
     static let shared = NotificationService()
     
+    
+    
     func uploadNotifications(type:NotificationType, tweet: Tweet? = nil, user: User? = nil){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         var values: [String: Any] = ["timestamp": Int(NSDate().timeIntervalSince1970),
@@ -39,4 +41,6 @@ struct NotificationService {
             }
         }
     }
+    
+    
 }
