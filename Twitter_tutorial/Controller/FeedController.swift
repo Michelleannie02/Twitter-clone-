@@ -106,7 +106,6 @@ extension FeedController:UICollectionViewDelegateFlowLayout{
         let height = viewModel.size(forWidth: view.frame.width).height
         return CGSize(width: view.frame.width, height: height + 72)
     }
-    
 }
 
 // MARK: - TweetCellDelegate
