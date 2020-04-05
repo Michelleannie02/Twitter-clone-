@@ -15,9 +15,25 @@ class ProfileController: UICollectionViewController{
     // MARK: - Properties
     private var user: User
     
-    private var tweets = [Tweet](){
-        didSet {collectionView.reloadData()}
+    private var selectoredFilter: ProfileFiterOptions = .tweets {
+        didSet{ collectionView.reloadData() }
     }
+    
+    private var tweets = [Tweet]()
+    private var likedTweets = [Tweet]()
+    private var replies = [Tweet]()
+    private var currentDataSource: [Tweet] {
+        switch selectoredFilter {
+        case .tweets:
+            return tweets
+        case .replies:
+            return replies
+        case .likes:
+            return likedTweets
+        }
+    }
+    
+    
     
     
     // MARK: - Lifecycle
@@ -47,6 +63,7 @@ class ProfileController: UICollectionViewController{
     func fetchTweets(){
         TweetService.shared.fetchTweets(for: user) { tweets in
             self.tweets = tweets
+            self.collectionView.reloadData()
         }
     }
     func checkIfUserIsFollowed() {
@@ -76,11 +93,11 @@ class ProfileController: UICollectionViewController{
 
 extension ProfileController{
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tweets.count
+        return currentDataSource.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
-        cell.tweet = tweets[indexPath.row]
+        cell.tweet = currentDataSource[indexPath.row]
         return cell
     }
 }
@@ -107,6 +124,11 @@ extension ProfileController:UICollectionViewDelegateFlowLayout{
 
 //MARK: - ProfileHeaderDelegate
 extension ProfileController:ProfileHeaderDelegate{
+    func didSelect(filter: ProfileFiterOptions) {
+        self.selectoredFilter = filter
+        
+    }
+    
     func handleEditProfileFollow(_ header: ProfileHeader) {
         if user.isCurrentUser{
             print("show edit profile controller")
