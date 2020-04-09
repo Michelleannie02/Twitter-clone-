@@ -37,14 +37,9 @@ class MainTabViewController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .twitterBlue
         authenticateUserAndConfigureUI()
-        
-//        logUserOut()
-        
-
     }
     // MARK: - API
-    
-    //useの受け渡し
+
     func fetchUser(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         UserService.shared.fetchUser(uid: uid) { user in
@@ -52,9 +47,8 @@ class MainTabViewController: UITabBarController {
         }
     }
     
-    
-    func authenticateUserAndConfigureUI(){
-        if Auth.auth().currentUser == nil{
+    func authenticateUserAndConfigureUI() {
+        if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let nav = UINavigationController(rootViewController: LoginController())
                 nav.modalPresentationStyle = .fullScreen
@@ -64,28 +58,18 @@ class MainTabViewController: UITabBarController {
             configureViewController()
             configureUI()
             fetchUser()
-            
         }
     }
     
-    func logUserOut(){
-        do{
-            try Auth.auth().signOut()
-        } catch let error {
-        }
-    }
     // MARK: - Selectors
     
-    @objc func actionButtonTapped(){
+    @objc func actionButtonTapped() {
         guard let user = user else { return }
         let controller = UploadTweetController(user: user, config: .tweet)
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true, completion: nil)
     }
-   
-    
-    
     // MARK: - Helpers
     func configureUI(){
         view.addSubview(actionButton)
