@@ -133,7 +133,12 @@ extension ProfileController{
 extension ProfileController:UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 350)
+        var height: CGFloat = 300
+        
+        if let bio = user.bio {
+            height += 40
+        }
+        return CGSize(width: view.frame.width, height: height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewModel = TweetViewModel(tweet: currentDataSource[indexPath.row])
@@ -174,7 +179,7 @@ extension ProfileController:ProfileHeaderDelegate{
                 self.user.isFollowed = true
                 self.collectionView.reloadData()
                 
-                NotificationService.shared.uploadNotifications(type: .follow,user: self.user)
+                NotificationService.shared.uploadNotifications(toUser: self.user, type: .follow)
             }
         }
     }
