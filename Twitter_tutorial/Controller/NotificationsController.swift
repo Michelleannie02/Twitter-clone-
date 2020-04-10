@@ -13,10 +13,13 @@ private let reuseIdentifier = "NotificationCell"
 class NotificationsController: UITableViewController {
        
     // MARK: - Properties
+    
     private var notifications = [Notification]() {
-        didSet{ tableView.reloadData() }
+        didSet { tableView.reloadData() }
     }
+    
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -30,13 +33,13 @@ class NotificationsController: UITableViewController {
     
     // MARK: - Selectors
     
-    @objc func handleRefresh(){
+    @objc func handleRefresh() {
         fetchNotifications()
     }
     
-    
     // MARK: - API
-    func fetchNotifications(){
+    
+    func fetchNotifications() {
         refreshControl?.beginRefreshing()
         
         NotificationService.shared.fetchNotification { notifications in
@@ -45,19 +48,24 @@ class NotificationsController: UITableViewController {
             self.checkIfUserIsFollowed(notifications: notifications)
         }
     }
+    
     func checkIfUserIsFollowed(notifications:[Notification]) {
-        for (index, notification) in notifications.enumerated() {
-            if case .follow = notification.type {
-                let user = notification.user
-                
-                UserService.shared.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
+        guard !notifications.isEmpty else { return }
+        
+        notifications.forEach { notification in
+            guard case .follow = notification.type else { return }
+            let user = notification.user
+            
+            UserService.shared.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
+                if let index = self.notifications.firstIndex(where: { $0.user.uid == notification.user.uid }) {
                     self.notifications[index].user.isFollowed = isFollowed
                 }
             }
         }
     }
+    
     // MARK: - Helpers
-    func configureUI(){
+    func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "Notification"
         

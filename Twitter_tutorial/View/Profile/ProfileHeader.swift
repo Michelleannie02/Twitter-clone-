@@ -82,7 +82,6 @@ class ProfileHeader: UICollectionReusableView {
     private let bionameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "abioture"
         label.numberOfLines = 3
         return label
     }()
@@ -180,7 +179,7 @@ class ProfileHeader: UICollectionReusableView {
         followersLabel.attributedText = viewModel.followerString
         fullnameLabel.text = user.fullname
         usernameLabel.text = viewModel.usernameText
-        
+        bionameLabel.text = user.bio
     }
 }
 
