@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "TweetCell"
 private let headerIdentifier = "ProfileHeader"
@@ -50,6 +51,8 @@ class ProfileController: UICollectionViewController{
         super.viewDidLoad()
         configureCollectionView()
         fetchTweets()
+        fetchReplies()
+        fetchLikedTweets()
         checkIfUserIsFollowed()
         fetchUserStats()
         
@@ -64,6 +67,16 @@ class ProfileController: UICollectionViewController{
         TweetService.shared.fetchTweets(for: user) { tweets in
             self.tweets = tweets
             self.collectionView.reloadData()
+        }
+    }
+    func fetchLikedTweets(){
+        TweetService.shared.fetchLikes(forUser: user) { tweets in
+            self.likedTweets = tweets
+        }
+    }
+    func fetchReplies(){
+        TweetService.shared.fetchReplies(forUser: user) { tweets in
+            self.replies = tweets
         }
     }
     func checkIfUserIsFollowed() {
@@ -86,6 +99,9 @@ class ProfileController: UICollectionViewController{
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(ProfileHeader.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
+        collectionView.contentInset.bottom = tabHeight
     }
 }
 
@@ -109,15 +125,31 @@ extension ProfileController{
         header.user = user
         return header
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = TweetController(tweet: currentDataSource[indexPath.row])
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 // MARK: -UICollectionViewDelegateFlowLayout
 extension ProfileController:UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 350)
+        var height: CGFloat = 300
+        
+        if user.bio != nil {
+            height += 40
+        }
+        return CGSize(width: view.frame.width, height: height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 120)
+        let viewModel = TweetViewModel(tweet: currentDataSource[indexPath.row])
+        var height = viewModel.size(forWidth: view.frame.width).height + 72
+        
+        if currentDataSource[indexPath.row].isReply {
+            height += 20
+        }
+        
+        return CGSize(width: view.frame.width, height: height)
     }
     
 }
@@ -131,7 +163,11 @@ extension ProfileController:ProfileHeaderDelegate{
     
     func handleEditProfileFollow(_ header: ProfileHeader) {
         if user.isCurrentUser{
-            print("show edit profile controller")
+            let controller = EditProfileController(user: user)
+            controller.delegate = self
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true, completion: nil)
             return
         }
         if user.isFollowed {
@@ -144,7 +180,7 @@ extension ProfileController:ProfileHeaderDelegate{
                 self.user.isFollowed = true
                 self.collectionView.reloadData()
                 
-                NotificationService.shared.uploadNotifications(type: .follow,user: self.user)
+                NotificationService.shared.uploadNotifications(toUser: self.user, type: .follow)
             }
         }
     }
@@ -152,6 +188,24 @@ extension ProfileController:ProfileHeaderDelegate{
     func handleDismissal() {
         navigationController?.popViewController(animated: true)
     }
+}
+// MARK: - EditProfileControllerDelegate
+
+extension ProfileController: EditProfileControllerDelegate {
+    func handleLogout() {
+        do{
+            try Auth.auth().signOut()
+            let nav = UINavigationController(rootViewController: LoginController())
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        } catch let error {
+            print("fail to Log out with error \(error.localizedDescription)")
+        }
+    }
     
-    
+    func controller(_ controller: EditProfileController, wantsToUpdate user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        self.user = user
+        self.collectionView.reloadData()
+    }
 }

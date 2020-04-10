@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import ActiveLabel
 
 protocol TweetHeaderDelegate: class {
     func showActionSheet()
+    func handleFetchUser(withUsername username: String)
 }
 
 class TweetHeader: UICollectionReusableView{
@@ -18,6 +20,7 @@ class TweetHeader: UICollectionReusableView{
     var tweet:Tweet?{
         didSet{ configure() }
     }
+    
     weak var delegate: TweetHeaderDelegate?
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -46,11 +49,12 @@ class TweetHeader: UICollectionReusableView{
         label.text = "spiderman"
         return label
     }()
-    private let captionLabel: UILabel = {
-        let label = UILabel()
+    private let captionLabel: ActiveLabel = {
+        let label = ActiveLabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.numberOfLines = 0
-        label.text = "my name is yoshiki takasi"
+        label.mentionColor = .twitterBlue
+        label.hashtagColor = .twitterBlue
         return label
     }()
     private let dateLabel: UILabel = {
@@ -68,6 +72,14 @@ class TweetHeader: UICollectionReusableView{
         button.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
         return button
     }()
+    private let replyLabel: ActiveLabel = {
+        let label = ActiveLabel()
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.mentionColor = .twitterBlue
+        return label
+    }()
+    
     private lazy var retweetLabel = UILabel()
     private lazy var likesLabel = UILabel()
 
@@ -123,8 +135,13 @@ class TweetHeader: UICollectionReusableView{
         labelStack.axis = .vertical
         labelStack.spacing = -6
         
-        let stack = UIStackView(arrangedSubviews: [profileImageView,labelStack])
-        stack.spacing = 12
+        let imageCaptionStack = UIStackView(arrangedSubviews: [profileImageView,labelStack])
+        imageCaptionStack.spacing = 12
+        
+        let stack = UIStackView(arrangedSubviews: [replyLabel,imageCaptionStack])
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.distribution = .fillProportionally
         
         addSubview(stack)
         stack.anchor(top: topAnchor, left: leftAnchor, paddingTop: 16, paddingLeft: 16)
@@ -148,6 +165,8 @@ class TweetHeader: UICollectionReusableView{
         addSubview(actionStack)
         actionStack.centerX(inView: self)
         actionStack.anchor(top: statsView.bottomAnchor,paddingTop: 16)
+        
+        configureMentionHandler()
         
     }
     
@@ -191,6 +210,8 @@ class TweetHeader: UICollectionReusableView{
         likesLabel.attributedText = viewModel.likesAttributedString
         likeButton.setImage(viewModel.likeButtonImage, for: .normal)
         likeButton.tintColor = viewModel.likeButtonTintColor
+        replyLabel.isHidden = viewModel.shouldHideReplyLabel
+        replyLabel.text = viewModel.replyText
     }
     
     func createButton(withImageName imageName:String) -> UIButton{
@@ -200,5 +221,9 @@ class TweetHeader: UICollectionReusableView{
         button.setDimensions(width: 20, height: 20)
         return button
     }
-    
+    func configureMentionHandler() {
+        captionLabel.handleMentionTap { username in
+            self.delegate?.handleFetchUser(withUsername: username)
+        }
+    }
 }

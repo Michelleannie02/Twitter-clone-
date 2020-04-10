@@ -15,7 +15,7 @@ struct TweetService {
                      completion: @escaping(DatabaseCopletion)){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        let values = ["uid": uid,
+        var values = ["uid": uid,
                       "timestamp":Int(NSDate().timeIntervalSince1970),
                       "likes":0,
                       "retweets":0,
@@ -30,23 +30,36 @@ struct TweetService {
                 REF_USER_TWEETS.child(uid).updateChildValues([tweetID:1], withCompletionBlock: completion)
             }
         case .reply(let tweet):
-            RFF_TWEET_REPLIES.child(tweet.tweetId).childByAutoId().updateChildValues(values, withCompletionBlock: completion)
+            values["replyingTo"] = tweet.user.username
+            RFF_TWEET_REPLIES.child(tweet.tweetId).childByAutoId().updateChildValues(values) { (err, ref) in
+                guard let replyKey = ref.key else { return }
+                REF_USER_REPLIES.child(uid).updateChildValues([tweet.tweetId: replyKey], withCompletionBlock: completion)
+            }
         }
     }
     func fetchTweets(completion:@escaping([Tweet]) -> Void){
         var tweets = [Tweet]()
+        guard let CurrentUid = Auth.auth().currentUser?.uid else { return }
         
-        REF_TWEETS.observe(.childAdded) { snapshot in
-            guard let dictionary = snapshot.value as? [String:Any] else { return }
-            guard let uid = dictionary["uid"] as? String else { return }
-            let tweetId = snapshot.key
+        REF_USER_FOLLOWING.child(CurrentUid).observe(.childAdded) { snapshot in
+            let followingUid = snapshot.key
             
-            UserService.shared.fetchUser(uid: uid) { user in
-                let tweet = Tweet(user: user, tweetId: tweetId, dictionary: dictionary)
+            REF_USER_TWEETS.child(followingUid).observe(.childAdded) { snapshot in
+                let tweetID = snapshot.key
+                
+                self.fetchTweet(withTweetID: tweetID) { tweet in
+                    tweets.append(tweet)
+                    completion(tweets)
+                }
+            }
+        }
+        REF_USER_TWEETS.child(CurrentUid).observe(.childAdded) { snapshot in
+            let tweetID = snapshot.key
+            
+            self.fetchTweet(withTweetID: tweetID) { tweet in
                 tweets.append(tweet)
                 completion(tweets)
             }
-            
         }
     }
     func fetchTweets(for user: User, completion: @escaping([Tweet]) -> Void){
@@ -70,6 +83,27 @@ struct TweetService {
             }
         }
     }
+    func fetchReplies(forUser user: User, completion: @escaping([Tweet]) -> Void){
+        var replies = [Tweet]()
+        
+        REF_USER_REPLIES.child(user.uid).observe(.childAdded) { snapshot in
+            let tweetKey = snapshot.key
+            guard let replyKey = snapshot.value as? String else { return }
+            
+            REF_TWEET_REPLIES.child(tweetKey).child(replyKey).observeSingleEvent(of: .value) { snapshot in
+                guard let dictionary = snapshot.value as? [String:Any] else { return }
+                guard let uid = dictionary["uid"] as? String else { return }
+                let replyID = snapshot.key
+                
+                UserService.shared.fetchUser(uid: uid) { user in
+                    let reply = Tweet(user: user, tweetId: replyID, dictionary: dictionary)
+                    replies.append(reply)
+                    completion(replies)
+                    
+                }
+            }
+        }
+    }
     func fetchReplies(forTweet tweet: Tweet, completion: @escaping([Tweet]) -> Void){
         var tweets = [Tweet]()
         RFF_TWEET_REPLIES.child(tweet.tweetId).observe(.childAdded) { snapshot in
@@ -84,6 +118,18 @@ struct TweetService {
             }
         }
         
+    }
+    func fetchLikes(forUser user: User, completion: @escaping([Tweet]) -> Void){
+        var tweets = [Tweet]()
+        REF_USER_LIKES.child(user.uid).observe(.childAdded) { snapshot in
+            let tweetID = snapshot.key
+            self.fetchTweet(withTweetID: tweetID) { likedTweet in
+                var tweet = likedTweet
+                tweet.didLike = true
+                tweets.append(tweet)
+                completion(tweets)
+            }
+        }
     }
     func likeTweet(tweet: Tweet, completion: @escaping(DatabaseCopletion)) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
