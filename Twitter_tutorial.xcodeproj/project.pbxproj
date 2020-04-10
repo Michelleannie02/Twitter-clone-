@@ -15,7 +15,7 @@
 		DA607673242C211100580051 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA607671242C211100580051 /* LaunchScreen.storyboard */; };
 		DA607680242C22A000580051 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60767F242C22A000580051 /* MainTabViewController.swift */; };
 		DA607683242C239600580051 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607682242C239600580051 /* FeedController.swift */; };
-		DA607685242C240300580051 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607684242C240200580051 /* ExploreController.swift */; };
+		DA607685242C240300580051 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607684242C240200580051 /* SearchController.swift */; };
 		DA607687242C241E00580051 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607686242C241E00580051 /* NotificationsController.swift */; };
 		DA607689242C243800580051 /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607688242C243800580051 /* ConversationsController.swift */; };
 		DA61725C242C332C00A9E9EC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA61725B242C332C00A9E9EC /* Extensions.swift */; };
@@ -70,7 +70,7 @@
 		DA607674242C211100580051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA60767F242C22A000580051 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		DA607682242C239600580051 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
-		DA607684242C240200580051 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
+		DA607684242C240200580051 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		DA607686242C241E00580051 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		DA607688242C243800580051 /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
 		DA61725B242C332C00A9E9EC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 				DA60767F242C22A000580051 /* MainTabViewController.swift */,
 				DA607682242C239600580051 /* FeedController.swift */,
 				DAD8F54F243B9A56000490B4 /* EditProfileController.swift */,
-				DA607684242C240200580051 /* ExploreController.swift */,
+				DA607684242C240200580051 /* SearchController.swift */,
 				DA607686242C241E00580051 /* NotificationsController.swift */,
 				DA607688242C243800580051 /* ConversationsController.swift */,
 				DA61726E24304A8C00A9E9EC /* UploadTweetController.swift */,
@@ -420,7 +420,7 @@
 				DA61726F24304A8C00A9E9EC /* UploadTweetController.swift in Sources */,
 				DA61726D242E305800A9E9EC /* User.swift in Sources */,
 				DAD8F553243BA6FD000490B4 /* EditProfileHeader.swift in Sources */,
-				DA607685242C240300580051 /* ExploreController.swift in Sources */,
+				DA607685242C240300580051 /* SearchController.swift in Sources */,
 				DA607669242C210B00580051 /* SceneDelegate.swift in Sources */,
 				DAD8F54A2439C55C000490B4 /* NotificationService.swift in Sources */,
 				DA607680242C22A000580051 /* MainTabViewController.swift in Sources */,

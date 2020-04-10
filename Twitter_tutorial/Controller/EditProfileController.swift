@@ -145,7 +145,7 @@ extension EditProfileController {
         return option == .bio ? 100 :48
     }
 }
-// MARK: - // MARK: - UITableViewDelegate
+// MARK: - UITableViewHeaderDelegate
 extension EditProfileController: EditProfileHeaderDelegate {
     func didTapChangeProfilePhoto() {
         present(imagePicker, animated: true ,completion: nil)

@@ -67,7 +67,8 @@ class FeedController: UICollectionViewController {
         }
     }
        
-       // MARK: - Helpers
+    // MARK: - Helpers
+    
     func configureUI(){
         view.backgroundColor = .white
         
