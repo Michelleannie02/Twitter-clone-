@@ -1,7 +1,31 @@
-Twitterのクローン版です
+Name
+====
 
-MVVCで作りました。
+Overview
 
-綺麗なコード構成を学ぶために作りました。
+## Description
+
+## Demo
+
+## VS. 
+
+## Requirement
+
+## Usage
+
+## Install
+
+## Contribution
+
+## Licence
+
+[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+
+## Author
+
+[tcnksm](https://github.com/tcnksm)
+
+
+
 
 
