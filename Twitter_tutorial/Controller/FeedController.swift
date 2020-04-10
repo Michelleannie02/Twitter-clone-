@@ -36,8 +36,14 @@ class FeedController: UICollectionViewController {
     
     // MARK: - Selectors
     
-    @objc func handleRefresh(){
+    @objc func handleRefresh() {
         fetchTweets()
+    }
+    @objc func handleProfileImageTap() {
+        guard let user = user else { return }
+        
+        let controller = ProfileController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - API
     func fetchTweets(){
@@ -61,7 +67,8 @@ class FeedController: UICollectionViewController {
         }
     }
        
-       // MARK: - Helpers
+    // MARK: - Helpers
+    
     func configureUI(){
         view.backgroundColor = .white
         
@@ -85,7 +92,10 @@ class FeedController: UICollectionViewController {
         profileImageView.setDimensions(width: 32, height: 32)
         profileImageView.layer.cornerRadius = 32 / 2
         profileImageView.layer.masksToBounds = true
+        profileImageView.isUserInteractionEnabled = true
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTap))
+        profileImageView.addGestureRecognizer(tap)
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
         profileImageView.contentMode = .scaleAspectFill
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
@@ -93,6 +103,7 @@ class FeedController: UICollectionViewController {
     
 }
 // MARK: -UICollectionViewDelegate/DataSource
+
 extension FeedController{
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tweets.count
@@ -112,8 +123,7 @@ extension FeedController{
 }
 // MARK: -UICollectionViewDelegateFlowLayout
 
-
-extension FeedController:UICollectionViewDelegateFlowLayout{
+extension FeedController:UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewModel = TweetViewModel(tweet: tweets[indexPath.row])
         let height = viewModel.size(forWidth: view.frame.width).height
@@ -122,7 +132,8 @@ extension FeedController:UICollectionViewDelegateFlowLayout{
 }
 
 // MARK: - TweetCellDelegate
-extension FeedController: TweetCellDelegate{
+
+extension FeedController: TweetCellDelegate {
     func handleFetchUser(withUsername username: String) {
         UserService.shared.fetchUser(withUsername: username) { user in
             let controller = ProfileController(user: user)
@@ -136,9 +147,10 @@ extension FeedController: TweetCellDelegate{
             cell.tweet?.didLike.toggle()
             let likes = tweet.didLike ? tweet.likes - 1 : tweet.likes + 1
             cell.tweet?.likes = likes
-            // only upload
-            guard !tweet.didLike ?? false else { return }
-            NotificationService.shared.uploadNotifications(type: .like, tweet: tweet)
+            
+            // only upload notification if tweet is being liked
+            guard !tweet.didLike else { return }
+            NotificationService.shared.uploadNotifications(toUser: tweet.user, type: .like, tweetID: tweet.tweetId)
         }
     }
     

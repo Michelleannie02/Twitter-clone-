@@ -18,6 +18,8 @@ class UploadTweetController: UIViewController {
     
     private let config: UploadTweetConfiguration
     
+    
+    
     private lazy var viewModel = UploadTweetViewModel(config: config)
     
     private lazy var actionButton: UIButton = {
@@ -89,7 +91,7 @@ class UploadTweetController: UIViewController {
                 return
             }
             if case .reply(let tweet) = self.config{
-                NotificationService.shared.uploadNotifications(type: .reply, tweet: tweet)
+                NotificationService.shared.uploadNotifications(toUser: tweet.user,type: .reply, tweetID: tweet.tweetId)
             }
             
             self.dismiss(animated: true, completion: nil)
@@ -97,6 +99,21 @@ class UploadTweetController: UIViewController {
     }
     
     // MARK: - API
+    fileprivate func uploadMentionNotification(forCaption caption: String, tweetID: String?) {
+        guard caption.contains("@") else { return }
+        let words = caption.components(separatedBy: .whitespacesAndNewlines)
+        
+        words.forEach { word in
+            guard word.hasPrefix("@") else { return }
+            
+            var username = word.trimmingCharacters(in: .symbols)
+            username = username.trimmingCharacters(in: .punctuationCharacters)
+            
+            UserService.shared.fetchUser(withUsername: username) { mentionedUser in
+                NotificationService.shared.uploadNotifications(toUser: mentionedUser, type: .mention, tweetID: tweetID)
+            }
+        }
+    }
     
     // MARK: - Helpers
     
