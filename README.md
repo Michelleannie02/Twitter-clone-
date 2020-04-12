@@ -46,7 +46,9 @@ Firebase, actionLabel, SDWEB
 主にIOSアプリの開発、SNSマーケティングを行っています。
 
 FB: https://www.facebook.com/rita.kajimura.1/
+
 Twitter: https://twitter.com/ADHD_RoutineNLP
+
 Instgram: https://www.instagram.com/routine_developper/
 
 
