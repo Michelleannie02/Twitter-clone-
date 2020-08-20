@@ -1,18 +1,26 @@
 Tweeter-Clone
 ====
 
+## Description
+
 Twitterのクローンアプリを自作してみました。
 
-## Description
-### ●主な機能：　
+## 📦Feature
 
-○Auth機能
-○ツイート投稿
-○いいね機能
-○フォロー、フォロワー機能
-○アンフォロー機能
-○フォーロー中のユーザーのみのツイート表示
-○ユーザー検索機能
+<h3 align="center">- Auth -</h3>
+
+<p align="center">
+  https://gyazo.com/f58d1ef3ce99f645a0f95ad17be626db
+
+<h3 align="center">- Tweet -</h3>
+
+<h3 align="center">- Favorite -</h3>
+
+<h3 align="center">- Follow & Unfollow -</h3>
+
+<h3 align="center">- Filter -</h3>
+
+<h3 align="center">- Search -</h3>
 
 ### ●DB　
 
@@ -22,15 +30,21 @@ Twitterのクローンアプリを自作してみました。
 
 ○MVVC
 
+### ●
 
 
-## Demo
+## 📱 Usage
 
-https://gyazo.com/f58d1ef3ce99f645a0f95ad17be626db
+
+
+## 👀 Demo
+
 
 ## Requirement
 
 Firebase, ActionLabel, SDWEB
+
+## 💳 License
 
 ## Author
 
