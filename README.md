@@ -1,4 +1,4 @@
-<img src="https://www.canva.com/design/DAEFYjefZAk/VHjjE8oItqLgaLZyV94jvA/view?utm_content=DAEFYjefZAk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" width="450px;" /><br>
+![Twitter clone](https://user-images.githubusercontent.com/56577971/90708886-e8cecd80-e2d5-11ea-82ba-ac682344e37a.png)
 
 <h2 align="center">Twitter Clone</h2>
 <p align="center">
