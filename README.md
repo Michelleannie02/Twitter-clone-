@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://developer.apple.com/swift/images/swift-og.png"><img src="https://developer.apple.com/swift/images/swift-og.png" width="80px;" /></a>
 <a>　</a>
-  <a href="https://firebase.google.com/"><img src="https://user-images.githubusercontent.com/39142850/71645860-dd686b00-2d21-11ea-93f3-953cee4f0b32.png" height="45px;" /></a>
+  <a href="https://firebase.google.com/"><img src="https://user-images.githubusercontent.com/39142850/71645860-dd686b00-2d21-11ea-93f3-953cee4f0b32.png" height="80px;" /></a>
 <a>　</a>
  
 <br><br><br>
