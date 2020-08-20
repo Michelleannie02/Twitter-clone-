@@ -17,14 +17,14 @@
 
 <br>
 
-## Requirement
+## ✋ Requirement
 
 * Xcode 11.6
 * Swift 5.2.4 
 
 <br> 
 
-## 📦Feature
+## 📦 Feature
 
 <h3 align="center">- Auth -</h3>
 
@@ -54,23 +54,30 @@
 
 <br>
 
-## 🕋DB　
+## 🕋 DB　
 
 ### Real time database
 
+![RealtimeDatabase](https://user-images.githubusercontent.com/56577971/90711778-8d540e00-e2dc-11ea-8e9f-091af9478cb8.png)
+
+
 <br>
-## Description
+
+## 🗣Description
 
 ### ○　ALL　CODE
 
 ### ○　USE　MVVC
 
 <br>
+
 ## 💳 License
 
 - [MIT](https://raw.githubusercontent.com/aocattleya/Ramen-Timer/master/LICENSE) 
+
 <br>
-## Author
+
+## 👨 Author
 
 - [Github](https://github.com/aocattleya)
 
