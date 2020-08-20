@@ -10,10 +10,17 @@
 <br><br><br>
 </p>
 
+## 📱 Usage
 
-## Description
+`$ git clone https://github.com/kajirita2002/Twitter-clone-.git`
 
-Twitterのクローンアプリを自作してみました。
+
+
+## Requirement
+
+* Xcode 11.6
+* Swift 5.2.4 
+
 
 ## 📦Feature
 
@@ -47,16 +54,16 @@ Twitterのクローンアプリを自作してみました。
 ### ●
 
 
-## 📱 Usage
 
 
+## Description
+
+Twitterのクローンアプリを自作してみました。
 
 ## 👀 Demo
 
 
-## Requirement
 
-Firebase, ActionLabel, SDWEB
 
 ## 💳 License
 
