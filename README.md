@@ -1,3 +1,5 @@
+![twitterClone](https://www.canva.com/design/DAEFYjefZAk/VHjjE8oItqLgaLZyV94jvA/view?utm_content=DAEFYjefZAk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+
 <h2 align="center">Twitter Clone</h2>
 <p align="center">
   <a href="https://developer.apple.com/swift/images/swift-og.png"><img src="https://user-images.githubusercontent.com/39142850/71645835-a98d4580-2d21-11ea-9693-348d12101bb4.png" width="80px;" /></a><br>
