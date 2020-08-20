@@ -1,8 +1,8 @@
-![twitterClone](https://www.canva.com/design/DAEFYjefZAk/VHjjE8oItqLgaLZyV94jvA/view?utm_content=DAEFYjefZAk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+<img src="https://www.canva.com/design/DAEFYjefZAk/VHjjE8oItqLgaLZyV94jvA/view?utm_content=DAEFYjefZAk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" width="450px;" /><br>
 
 <h2 align="center">Twitter Clone</h2>
 <p align="center">
-  <a href="https://developer.apple.com/swift/images/swift-og.png"><img src="https://user-images.githubusercontent.com/39142850/71645835-a98d4580-2d21-11ea-9693-348d12101bb4.png" width="80px;" /></a><br>
+  <a href="https://developer.apple.com/swift/images/swift-og.png"><img src="https://developer.apple.com/swift/images/swift-og.png" width="80px;" /></a><br>
 <a>　</a>
   <a href="https://firebase.google.com/"><img src="https://user-images.githubusercontent.com/39142850/71645860-dd686b00-2d21-11ea-93f3-953cee4f0b32.png" height="45px;" /></a>
 <a>　</a>
