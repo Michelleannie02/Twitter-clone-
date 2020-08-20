@@ -32,23 +32,37 @@
 
 ---
 
-<h3 align="center">- Tweet -</h3>
+<h3>- Tweet -</h3>
+
+[![Image from Gyazo](https://i.gyazo.com/f12ef56a8f272d0db56ad9f87fff2893.gif)](https://gyazo.com/f12ef56a8f272d0db56ad9f87fff2893)
 
 ---
 
-<h3 align="center">- Favorite -</h3>
+<h3>- Search -</h3>
+
+
+[![Image from Gyazo](https://i.gyazo.com/9b7105ee547985bd04e3eb129135dd90.gif)](https://gyazo.com/9b7105ee547985bd04e3eb129135dd90)
 
 ---
 
 <h3 align="center">- Follow & Unfollow -</h3>
 
+[![Image from Gyazo](https://i.gyazo.com/ac4c5cac8e3544acdc65083ed83b9ea1.gif)](https://gyazo.com/ac4c5cac8e3544acdc65083ed83b9ea1)
+
 ---
+
+<h3 align="center">- Favorite -</h3>
+
+[![Image from Gyazo](https://i.gyazo.com/1f27c81d584ac5dcdfeafd2fa33e47da.gif)](https://gyazo.com/1f27c81d584ac5dcdfeafd2fa33e47da)
+
+---
+
 
 <h3 align="center">- Filter -</h3>
 
----
+[![Image from Gyazo](https://i.gyazo.com/e927c0cd4cfe86bb971d801d8ac325bd.gif)](https://gyazo.com/e927c0cd4cfe86bb971d801d8ac325bd)
 
-<h3 align="center">- Search -</h3>
+
 
 <br>
 
