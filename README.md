@@ -43,37 +43,27 @@
 
 <h3 align="center">- Search -</h3>
 
-### ●DB　
+## 🕋DB　
 
-○Real time database
-
-### ●Architeture 
-
-○MVVC
-
-### ●
-
-
+### Real time database
 
 
 ## Description
 
-Twitterのクローンアプリを自作してみました。
+### ○　ALL　CODE
 
-## 👀 Demo
-
-
+### ○　USE　MVVC
 
 
 ## 💳 License
 
+- [MIT](https://raw.githubusercontent.com/aocattleya/Ramen-Timer/master/LICENSE) 
+
 ## Author
 
-梶村律太（りた）
+- [Github](https://github.com/aocattleya)
 
-明治大学3年次休学→語学留学半年→G's Academy Lab8期
-
-FB: https://www.facebook.com/rita.kajimura.1/
+- [FB](https://www.facebook.com/rita.kajimura.1/)
 
 
 
