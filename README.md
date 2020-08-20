@@ -28,8 +28,9 @@
 
 <h3 align="center">- Auth -</h3>
 
+<p align="center">
 [![Image from Gyazo](https://i.gyazo.com/c06c66cdf7e28dcfbae8cdb10e111b4a.gif)](https://gyazo.com/c06c66cdf7e28dcfbae8cdb10e111b4a)
-
+</p>
 ---
 
 <h3 align="center">- Tweet -</h3>
