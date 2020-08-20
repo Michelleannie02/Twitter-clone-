@@ -1,4 +1,4 @@
-![Twitter clone](https://user-images.githubusercontent.com/56577971/90708886-e8cecd80-e2d5-11ea-82ba-ac682344e37a.png)
+![ストライキに参加しませんか？ #STRIKEWITHUS](https://user-images.githubusercontent.com/56577971/90709240-b376af80-e2d6-11ea-93b0-afb8060743d6.png)
 
 <h2 align="center">Twitter Clone</h2>
 <p align="center">
