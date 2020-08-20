@@ -10,17 +10,19 @@
 <br><br><br>
 </p>
 
+
 ## 📱 Usage
 
 `$ git clone https://github.com/kajirita2002/Twitter-clone-.git`
 
-
+<br>
 
 ## Requirement
 
 * Xcode 11.6
 * Swift 5.2.4 
 
+<br> 
 
 ## 📦Feature
 
@@ -30,35 +32,44 @@
   <img src="https://gyazo.com/f58d1ef3ce99f645a0f95ad17be626db" width=40%>
 </p>
 
-
-  
+---
 
 <h3 align="center">- Tweet -</h3>
 
+---
+
 <h3 align="center">- Favorite -</h3>
+
+---
 
 <h3 align="center">- Follow & Unfollow -</h3>
 
+---
+
 <h3 align="center">- Filter -</h3>
 
+---
+
 <h3 align="center">- Search -</h3>
+
+<br>
 
 ## 🕋DB　
 
 ### Real time database
 
-
+<br>
 ## Description
 
 ### ○　ALL　CODE
 
 ### ○　USE　MVVC
 
-
+<br>
 ## 💳 License
 
 - [MIT](https://raw.githubusercontent.com/aocattleya/Ramen-Timer/master/LICENSE) 
-
+<br>
 ## Author
 
 - [Github](https://github.com/aocattleya)
