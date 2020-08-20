@@ -9,8 +9,10 @@ Twitterのクローンアプリを自作してみました。
 
 <h3 align="center">- Auth -</h3>
 
-<p align="center">
-  https://gyazo.com/f58d1ef3ce99f645a0f95ad17be626db
+<p align="center">  
+  <img src="https://gyazo.com/f58d1ef3ce99f645a0f95ad17be626db" width=40%>
+</p>
+  
 
 <h3 align="center">- Tweet -</h3>
 
