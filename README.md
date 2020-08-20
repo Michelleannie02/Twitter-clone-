@@ -29,7 +29,7 @@
 <h3 align="center">- Auth -</h3>
 
 <p align="center">  
-  <img src="https://gyazo.com/f58d1ef3ce99f645a0f95ad17be626db" width=40%>
+  [![Image from Gyazo](https://i.gyazo.com/c06c66cdf7e28dcfbae8cdb10e111b4a.gif)](https://gyazo.com/c06c66cdf7e28dcfbae8cdb10e111b4a)
 </p>
 
 ---
@@ -65,7 +65,9 @@
 
 ## 🗣Description
 
-### ○　ALL CODE   &&   USE MVVC
+### ALL CODE   &&   USE MVVC
+
+<br>
 
 [![Image from Gyazo](https://i.gyazo.com/f57c3d12825b4773fa92576f9916ea76.png)](https://gyazo.com/f57c3d12825b4773fa92576f9916ea76)
 
